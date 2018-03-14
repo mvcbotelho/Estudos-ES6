@@ -8,22 +8,21 @@ class NegociacaoController {
         this._inputValor = $('#valor');
     }
 
-    adiciona(event){
+    adiciona(event) {
         event.preventDefault();
 
-        let data = new Date(
-            ...this._inputData.value
-                .split('-')
-                .map((item, indice) => item - indice % 2)
-        );
-        console.log(data);
-
         let negociacao = new Negociacao(
-            data,
+            DateHelper.textoParaDara(this._inputData.value),
             this._inputQtd.value,
             this._inputValor.value
         );
 
+        let diaMesAno = negociacao.data.getDate()
+            + '/' + (negociacao.data.getMonth() + 1)
+            + '/' + negociacao.data.getFullYear();
+
         console.log(negociacao);
+        console.log(DateHelper.dataParaTexto(negociacao.data));
+
     };
 }
